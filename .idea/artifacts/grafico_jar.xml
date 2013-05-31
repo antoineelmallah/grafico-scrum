@@ -1,0 +1,28 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="grafico:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/grafico_jar</output-path>
+    <root id="archive" name="grafico.jar">
+      <element id="module-output" name="grafico" />
+      <element id="extracted-dir" path="/usr/share/groovy/lib/mockobjects-core.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="/usr/share/groovy/lib/antlr.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="/usr/share/groovy/lib/asm3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="/usr/share/groovy/lib/asm3-util.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="/usr/share/groovy/lib/groovy-1.8.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="/usr/share/groovy/lib/asm3-tree.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="/usr/share/groovy/lib/regexp.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="/usr/share/groovy/lib/commons-cli.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="/usr/share/groovy/lib/bsf.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="/usr/share/groovy/lib/jline.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="/usr/share/groovy/lib/xstream.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="/usr/share/groovy/lib/commons-logging.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="/usr/share/groovy/lib/ivy.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="/usr/share/groovy/lib/jansi.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="/usr/share/groovy/lib/asm3-analysis.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="/usr/share/groovy/lib/junit4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Documentos/graficos_scrum/dependencias/jcommon-1.0.17.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Documentos/graficos_scrum/dependencias/poi-3.9-20121203.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Documentos/graficos_scrum/dependencias/jfreechart-1.0.14.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Documentos/graficos_scrum/dependencias/poi-ooxml-3.9-20121203.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
