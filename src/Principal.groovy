@@ -8,16 +8,12 @@ import java.awt.*
 
 class Principal {
 
-    static def graficos
-    static JPanel panelGrafico
-    private static final String AUTO_ATUALIZAR = "atualizar.automaticamente"
-
-    private Temporizador temporizador
-
+    private static JPanel panelGrafico
     private JCheckBoxMenuItem checkItem
 
+    private static def graficos
+    private Temporizador temporizador
     private boolean autoAtualizar
-//    private def propriedades = [:]
 
     public static void main(args) {
         Principal principal = new Principal()
@@ -25,10 +21,10 @@ class Principal {
         principal.criarGraficos()
         principal.criarTemporizador()
         principal.atualizarTemporizador()
-        principal.init(graficos)
+        principal.init()
     }
 
-    def init(def graficos) {
+    def init() {
 
         new SwingBuilder().build {
             frame(title: 'BurnUp Chart',
