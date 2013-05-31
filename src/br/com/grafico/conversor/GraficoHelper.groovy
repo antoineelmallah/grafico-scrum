@@ -34,9 +34,9 @@ class GraficoHelper {
     static void exportarImagem(Grafico grafico) {
         def tamanho = [600, 400]
         ChartRenderingInfo info = new ChartRenderingInfo(new StandardEntityCollection())
-        String caminhoPastaDados = "${PropertiesUtils.getPropriedade('caminho.home')}/dados"
+        String caminhoOutput = "${PropertiesUtils.getPropriedade('caminho.home')}/output/"
         ChartUtilities.saveChartAsPNG(
-                new File("${caminhoPastaDados}BurnUpChart - ${new Date().format('dd-MM-yyyy-hhmmss')}.png"),
+                new File("${caminhoOutput}BurnUpChart - ${new Date().format('dd-MM-yyyy-hhmmss')}.png"),
                 grafico.panel.chart,
                 *tamanho,
                 info

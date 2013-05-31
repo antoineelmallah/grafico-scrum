@@ -22,7 +22,7 @@ class Principal {
         Principal principal = new Principal()
 
         principal.carregarPropriedades()
-        GraficoHelper.criarGraficos()
+        principal.criarGraficos()
         principal.criarTemporizador()
         principal.atualizarTemporizador()
         principal.init(graficos)
@@ -138,6 +138,10 @@ class Principal {
                 AUTO_ATUALIZAR,
                 PropertiesUtils.getPropriedade(AUTO_ATUALIZAR) as boolean
         )
+    }
+
+    private void criarGraficos() {
+        graficos = GraficoHelper.criarGraficos()
     }
 
 }
