@@ -16,12 +16,12 @@ class Principal {
     private boolean autoAtualizar
 
     public static void main(args) {
-        Principal principal = new Principal()
-
-        principal.criarGraficos()
-        principal.criarTemporizador()
-        principal.atualizarTemporizador()
-        principal.init()
+        new Principal().with {
+            criarGraficos()
+            criarTemporizador()
+            atualizarTemporizador()
+            init()
+        }
     }
 
     def init() {
