@@ -10,8 +10,8 @@ class Temporizador {
 
     def Temporizador(String nomeTarefa) {
         this.nomeTarefa = nomeTarefa
-        this.delay = PropertiesUtils.getPropriedade("timer.delay") as Integer
-        this.period = PropertiesUtils.getPropriedade("timer.period") as Integer
+        this.delay = Propriedades.TIMER_DELAY.getValor() as Integer
+        this.period = Propriedades.TIMER_PERIOD.getValor() as Integer
     }
 
     def iniciar() {

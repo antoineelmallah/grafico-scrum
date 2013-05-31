@@ -1,6 +1,6 @@
 package br.com.grafico.modelo
 
-import br.com.grafico.utils.PropertiesUtils
+import br.com.grafico.utils.Propriedades
 
 class Sprint {
     String planilha
@@ -20,7 +20,7 @@ class Sprint {
     def getPeriodo() {
         Calendar calendar = GregorianCalendar.getInstance()
         calendar.setTime(inicio)
-        def numeroDiasSprint = PropertiesUtils.getPropriedade("numero.dias.sprint") as Integer
+        def numeroDiasSprint = Propriedades.DIAS_SPRINT.getValor() as Integer
         calendar.add(Calendar.DAY_OF_MONTH, numeroDiasSprint)
         return inicio..calendar.time
     }

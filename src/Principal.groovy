@@ -1,5 +1,5 @@
 import br.com.grafico.conversor.GraficoHelper
-import br.com.grafico.utils.PropertiesUtils
+import br.com.grafico.utils.Propriedades
 import br.com.grafico.utils.Temporizador
 import groovy.swing.SwingBuilder
 
@@ -16,12 +16,12 @@ class Principal {
 
     private JCheckBoxMenuItem checkItem
 
-    private def propriedades = [:]
+    private boolean autoAtualizar
+//    private def propriedades = [:]
 
     public static void main(args) {
         Principal principal = new Principal()
 
-        principal.carregarPropriedades()
         principal.criarGraficos()
         principal.criarTemporizador()
         principal.atualizarTemporizador()
@@ -62,7 +62,7 @@ class Principal {
                                     name: 'Teste',
                                     closure: {
                                         atualizarTemporizador()
-                                        propriedades.put(AUTO_ATUALIZAR, checkItem.selected)
+                                        autoAtualizar = checkItem.selected
                                     }
                             )
                         }
@@ -124,20 +124,12 @@ class Principal {
     }
 
     private boolean deveAgendarAtualizacao() {
-        boolean agendar = false
         if (!checkItem) {
-            agendar = propriedades[AUTO_ATUALIZAR]
+            autoAtualizar = Propriedades.AUTO_ATUALIZAR.getValor() as boolean
         } else {
-            agendar = checkItem.selected
+            autoAtualizar = checkItem.selected
         }
-        return agendar
-    }
-
-    private void carregarPropriedades() {
-        propriedades.put(
-                AUTO_ATUALIZAR,
-                PropertiesUtils.getPropriedade(AUTO_ATUALIZAR) as boolean
-        )
+        return autoAtualizar
     }
 
     private void criarGraficos() {

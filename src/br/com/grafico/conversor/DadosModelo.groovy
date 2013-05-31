@@ -2,7 +2,7 @@ package br.com.grafico.conversor
 
 import br.com.grafico.modelo.Sprint
 import br.com.grafico.modelo.Story
-import br.com.grafico.utils.PropertiesUtils
+import br.com.grafico.utils.Propriedades
 import org.apache.poi.hssf.usermodel.HSSFCell
 import org.apache.poi.hssf.usermodel.HSSFDateUtil
 import org.apache.poi.hssf.usermodel.HSSFWorkbook
@@ -14,7 +14,7 @@ class DadosModelo {
     def sprints = []
 
     def DadosModelo() {
-        planilha = new File(PropertiesUtils.getPropriedade('caminho.planilha'))
+        planilha = new File(Propriedades.CAMINHO_PLANILHA.getValor())
         wb = new HSSFWorkbook(planilha.newInputStream())
     }
 

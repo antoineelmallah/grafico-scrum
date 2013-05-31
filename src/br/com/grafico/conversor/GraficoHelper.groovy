@@ -2,7 +2,7 @@ package br.com.grafico.conversor
 
 import br.com.grafico.modelo.Grafico
 import br.com.grafico.modelo.Sprint
-import br.com.grafico.utils.PropertiesUtils
+import br.com.grafico.utils.Propriedades
 import org.jfree.chart.ChartRenderingInfo
 import org.jfree.chart.ChartUtilities
 import org.jfree.chart.entity.StandardEntityCollection
@@ -34,7 +34,7 @@ class GraficoHelper {
     static void exportarImagem(Grafico grafico) {
         def tamanho = [600, 400]
         ChartRenderingInfo info = new ChartRenderingInfo(new StandardEntityCollection())
-        String caminhoOutput = "${PropertiesUtils.getPropriedade('caminho.home')}/output/"
+        String caminhoOutput = "${Propriedades.CAMINHO_HOME.getValor()}/output/"
         ChartUtilities.saveChartAsPNG(
                 new File("${caminhoOutput}BurnUpChart - ${new Date().format('dd-MM-yyyy-hhmmss')}.png"),
                 grafico.panel.chart,
