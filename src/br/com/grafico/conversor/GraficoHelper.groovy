@@ -12,6 +12,14 @@ import org.jfree.data.time.TimeSeriesCollection
 
 class GraficoHelper {
 
+    static def criarGraficos() {
+        def graficos = []
+        new DadosModelo().criarSprints().each {
+            graficos << criarGrafico(it)
+        }
+        return graficos
+    }
+
     static Grafico criarGrafico(Sprint sprint) {
         Grafico grafico = new Grafico(
             titulo: "SPRINT ${sprint.inicio.format('dd/MM/yyyy')} - Velocidade: ${sprint.getVelocidade()} pts",
@@ -26,7 +34,7 @@ class GraficoHelper {
     static void exportarImagem(Grafico grafico) {
         def tamanho = [600, 400]
         ChartRenderingInfo info = new ChartRenderingInfo(new StandardEntityCollection())
-        String caminhoPastaDados = PropertiesUtils.getPropriedade('caminho.dados')
+        String caminhoPastaDados = "${PropertiesUtils.getPropriedade('caminho.home')}/dados"
         ChartUtilities.saveChartAsPNG(
                 new File("${caminhoPastaDados}BurnUpChart - ${new Date().format('dd-MM-yyyy-hhmmss')}.png"),
                 grafico.panel.chart,

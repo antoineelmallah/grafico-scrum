@@ -2,22 +2,32 @@ package br.com.grafico.utils
 
 class PropertiesUtils {
 
-    static Properties props
+    private static Properties props
+    private static File propsFile
 
     static def getPropriedade(String propriedade) {
-        return getProps().getProperty(propriedade)
+        def _propriedade = getProps().getProperty(propriedade)
+        if (!_propriedade) throw new RuntimeException("A propriedade ${propriedade} não foi configurada.")
+        return _propriedade
     }
 
     private static getProps() {
         if (!props) {
             props = new Properties()
-            String diretorioCorrente = System.getProperty("user.home")
-            File propsFile = new File("${diretorioCorrente}/grafico/conf/conf.properties")
-            if (!propsFile || !propsFile.exists())
-                throw new RuntimeException("Arquivo $diretorioCorrente/grafico/conf/conf.properties não encontrado!")
-            props.load(propsFile.newDataInputStream())
+            props.load(getPropsFile().newDataInputStream())
         }
         return props
+    }
+
+    private static File getPropsFile() {
+        if (!propsFile) {
+            String caminho = "${System.getProperty("user.home")}/grafico/conf/conf.properties"
+            propsFile = new File(caminho)
+            if (!propsFile.exists()) {
+                throw new RuntimeException("Arquivo $caminho não encontrado!")
+            }
+        }
+        return propsFile
     }
 
 }

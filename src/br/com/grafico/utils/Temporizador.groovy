@@ -19,7 +19,10 @@ class Temporizador {
     }
 
     def parar() {
-        this.timer.cancel()
+        if (timer) {
+            timer.cancel()
+            timer.purge()
+        }
     }
 
     private Timer getTimer() {

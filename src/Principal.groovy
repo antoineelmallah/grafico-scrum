@@ -1,5 +1,5 @@
-import br.com.grafico.conversor.DadosModelo
 import br.com.grafico.conversor.GraficoHelper
+import br.com.grafico.utils.PropertiesUtils
 import br.com.grafico.utils.Temporizador
 import groovy.swing.SwingBuilder
 
@@ -10,16 +10,25 @@ class Principal {
 
     static def graficos
     static JPanel panelGrafico
+    private static final String AUTO_ATUALIZAR = "atualizar.automaticamente"
+
+    private Temporizador temporizador
+
+    private JCheckBoxMenuItem checkItem
+
+    private def propriedades = [:]
 
     public static void main(args) {
         Principal principal = new Principal()
 
-        principal.criarGraficos()
+        principal.carregarPropriedades()
+        GraficoHelper.criarGraficos()
         principal.criarTemporizador()
-        principal.imprimir(graficos)
+        principal.atualizarTemporizador()
+        principal.init(graficos)
     }
 
-    def imprimir(def graficos) {
+    def init(def graficos) {
 
         new SwingBuilder().build {
             frame(title: 'BurnUp Chart',
@@ -44,6 +53,16 @@ class Principal {
                                     name: 'Atualizar',
                                     closure: {
                                         atualizarGraficos()
+                                    }
+                            )
+                        }
+                        checkItem = checkBoxMenuItem(
+                                selected: deveAgendarAtualizacao()) {
+                            action(
+                                    name: 'Teste',
+                                    closure: {
+                                        atualizarTemporizador()
+                                        propriedades.put(AUTO_ATUALIZAR, checkItem.selected)
                                     }
                             )
                         }
@@ -88,19 +107,37 @@ class Principal {
 
     }
 
-    private void criarTemporizador(JPanel panel) {
-        Temporizador t = new Temporizador("atualizando graficos")
-        t.tarefa = {
-            atualizarGraficos()
+    private void criarTemporizador() {
+        if (!temporizador) {
+            temporizador = new Temporizador("atualizando graficos")
+            temporizador.tarefa = {
+                atualizarGraficos()
+            }
         }
-        t.iniciar()
     }
 
-    private static void criarGraficos() {
-        graficos = []
-        new DadosModelo().criarSprints().each {
-            graficos << GraficoHelper.criarGrafico(it)
+    private void atualizarTemporizador() {
+        if (deveAgendarAtualizacao())
+            temporizador.iniciar()
+        else
+            temporizador.parar()
+    }
+
+    private boolean deveAgendarAtualizacao() {
+        boolean agendar = false
+        if (!checkItem) {
+            agendar = propriedades[AUTO_ATUALIZAR]
+        } else {
+            agendar = checkItem.selected
         }
+        return agendar
+    }
+
+    private void carregarPropriedades() {
+        propriedades.put(
+                AUTO_ATUALIZAR,
+                PropertiesUtils.getPropriedade(AUTO_ATUALIZAR) as boolean
+        )
     }
 
 }
