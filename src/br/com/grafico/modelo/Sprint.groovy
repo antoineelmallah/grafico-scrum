@@ -2,7 +2,7 @@ package br.com.grafico.modelo
 
 import br.com.grafico.utils.Propriedades
 
-class Sprint {
+class Sprint implements Serializable {
     String planilha
     Date inicio
     def stories = []
@@ -28,5 +28,33 @@ class Sprint {
     def getVelocidade() {
         Date ultimaDataPeriodo = getPeriodo()[-1]
         return getFeito(ultimaDataPeriodo)
+    }
+
+    def validate() {
+        campoPlanilhaDeveSerInformado()
+        campoDataInicioDeveSerInformado()
+        stories.each {
+            it.validate()
+            dataInicioStoryNaoPodeSerAnteriorQueDataSprint(inicio, it)
+        }
+
+    }
+
+    private void campoPlanilhaDeveSerInformado() {
+        if (!planilha || planilha.trim().isEmpty()) {
+            throw new IllegalArgumentException("Campo 'planilha' deve ser informado.")
+        }
+    }
+
+    private void campoDataInicioDeveSerInformado() {
+        if (!inicio) {
+            throw new IllegalArgumentException("Campo 'data de início' deve ser informado.")
+        }
+    }
+
+    private void dataInicioStoryNaoPodeSerAnteriorQueDataSprint(Date inicioSprint, Story story) {
+        if (story && story.inicio.before(inicioSprint)) {
+            throw new IllegalArgumentException("A data de início da story não pode ser anterior que a data de início da sprint.")
+        }
     }
 }

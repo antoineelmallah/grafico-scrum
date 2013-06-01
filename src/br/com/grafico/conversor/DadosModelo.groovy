@@ -47,6 +47,8 @@ class DadosModelo {
             }
         }
 
+        sprints.each {it.validate()}
+
         return sprints
     }
 
