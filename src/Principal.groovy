@@ -55,7 +55,7 @@ class Principal {
                         checkItem = checkBoxMenuItem(
                                 selected: deveAgendarAtualizacao()) {
                             action(
-                                    name: 'Teste',
+                                    name: 'Atualizar automaticamente',
                                     closure: {
                                         atualizarTemporizador()
                                         autoAtualizar = checkItem.selected
