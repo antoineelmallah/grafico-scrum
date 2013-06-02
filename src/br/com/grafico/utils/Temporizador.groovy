@@ -31,7 +31,7 @@ class Temporizador {
             @Override
             void run() {
                 tarefa()
-                println "Executou tarefa $nomeTarefa"
+                println "Tarefa '${nomeTarefa}' foi executada."
             }
         }, delay, period)
         return timer
