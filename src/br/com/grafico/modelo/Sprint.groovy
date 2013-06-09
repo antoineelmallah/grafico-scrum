@@ -16,10 +16,6 @@ class Sprint implements Serializable {
         return pontos
     }
 
-    private boolean isUltimoDiaPeriodo(Date dia) {
-        getPeriodo()[-1] == dia
-    }
-
     def getAFazer(Date dia) {
         def pontos = stories.findAll({it.inicio <= dia})*.pontos.sum()
         return pontos ?: 0
@@ -32,15 +28,8 @@ class Sprint implements Serializable {
         return inicio..fimPeriodo
     }
 
-    private Date getMaiorDataStorys() {
-        Date maiorDataInicio = stories*.inicio.max()
-        Date maiorDataTermino = stories*.termino.max()
-        return (maiorDataTermino && maiorDataTermino > maiorDataInicio)? maiorDataTermino: maiorDataInicio
-    }
-
     def getVelocidade() {
-        Date ultimaDataPeriodo = getPeriodo()[-1]
-        return getFeito(ultimaDataPeriodo)
+        return getFeito(getUltimoDiaPeriodo())
     }
 
     void setProxima(Sprint proxima) {
@@ -48,18 +37,6 @@ class Sprint implements Serializable {
         if (!proxima || proxima.inicio > inicio) {
             this.proxima = proxima
         }
-    }
-
-    // Calcula a diferença de stories entre sprints consecutivas
-    float getResiduo(Date data) {
-        float residuo = 0
-        if (proxima && isUltimoDiaPeriodo(data)) {
-            residuo = proxima.stories.collect { s2 ->
-                def s1 = stories.find { s -> s.story.trim() == s2.story.trim() }
-                s1? s2.pontos - s1.pontos: 0
-            }.sum()
-        }
-        return residuo
     }
 
     def validate() {
@@ -89,4 +66,31 @@ class Sprint implements Serializable {
             throw new IllegalArgumentException("A data de início da story não pode ser anterior que a data de início da sprint.")
         }
     }
+
+    private boolean isUltimoDiaPeriodo(Date dia) {
+        getUltimoDiaPeriodo() == dia
+    }
+
+    private Date getUltimoDiaPeriodo() {
+        return getPeriodo()[-1]
+    }
+
+    private Date getMaiorDataStorys() {
+        Date maiorDataInicio = stories*.inicio.max()
+        Date maiorDataTermino = stories*.termino.max()
+        return (maiorDataTermino && maiorDataTermino > maiorDataInicio)? maiorDataTermino: maiorDataInicio
+    }
+
+    // Calcula a diferença de stories entre sprints consecutivas
+    private float getResiduo(Date data) {
+        float residuo = 0
+        if (proxima && isUltimoDiaPeriodo(data)) {
+            residuo = proxima.stories.collect { s2 ->
+                def s1 = stories.find { s -> s.story.trim() == s2.story.trim() }
+                s1? s2.pontos - s1.pontos: 0
+            }.sum()
+        }
+        return residuo
+    }
+
 }

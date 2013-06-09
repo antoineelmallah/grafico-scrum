@@ -38,11 +38,13 @@ class DadosModelo {
             }
 
             if (sprints.size() > 1) {
+                // Seta as sprints imediatamente posteriores a sprint corrente
                 (1..<sprints.size()).reverse().each {
                     sprints[it].setProxima(sprints[it - 1])
                 }
             }
 
+            // Cria stories e adiciona as sprints
             sprints.each {sprint->
                 def sheet = wb.getSheet(sprint.planilha)
                 def rowIt = sheet.rowIterator()
