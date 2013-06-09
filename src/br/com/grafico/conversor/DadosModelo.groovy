@@ -37,6 +37,12 @@ class DadosModelo {
                 sprints = sprints[0..3]
             }
 
+            if (sprints.size() > 1) {
+                (1..<sprints.size()).reverse().each {
+                    sprints[it].setProxima(sprints[it - 1])
+                }
+            }
+
             sprints.each {sprint->
                 def sheet = wb.getSheet(sprint.planilha)
                 def rowIt = sheet.rowIterator()

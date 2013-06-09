@@ -2,7 +2,7 @@ package br.com.grafico.modelo
 
 class Story implements Serializable {
     String story
-    Integer pontos
+    def pontos
     Date inicio
     Date termino
 
