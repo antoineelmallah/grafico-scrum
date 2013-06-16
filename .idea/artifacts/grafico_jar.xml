@@ -23,6 +23,7 @@
       <element id="extracted-dir" path="$USER_HOME$/Documentos/graficos_scrum/dependencias/poi-3.9-20121203.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$USER_HOME$/Documentos/graficos_scrum/dependencias/jfreechart-1.0.14.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$USER_HOME$/Documentos/graficos_scrum/dependencias/poi-ooxml-3.9-20121203.jar" path-in-jar="/" />
+      <element id="file-copy" path="$USER_HOME$/Documentos/graficos_scrum/dependencias/jira-rest-java-client-core-2.0.0-m19.jar" />
     </root>
   </artifact>
 </component>
